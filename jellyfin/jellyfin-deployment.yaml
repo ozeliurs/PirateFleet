@@ -12,6 +12,8 @@ spec:
       labels:
         app: jellyfin
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-media
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin
