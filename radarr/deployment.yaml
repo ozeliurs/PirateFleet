@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-media
+      containers:
+        - name: radarr
+          image: lscr.io/linuxserver/radarr:latest
+          ports:
+            - containerPort: 7878
+              protocol: TCP
+          volumeMounts:
+            - name: radarr-config
+              mountPath: /config
+            - name: radarr-media
+              mountPath: /home/media
+            - name: radarr-downloads
+              mountPath: /home/downloads
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+      volumes:
+        - name: radarr-config
+          persistentVolumeClaim:
+            claimName: radarr-config
+        - name: radarr-media
+          persistentVolumeClaim:
+            claimName: radarr-media-pvc
+        - name: radarr-downloads
+          persistentVolumeClaim:
+            claimName: radarr-downloads-pvc
