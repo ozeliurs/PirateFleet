@@ -11,3 +11,4 @@ resources:
   - ingress.yaml
   - service.yaml
   - namespace.yaml
+  - sealed-secret.yaml

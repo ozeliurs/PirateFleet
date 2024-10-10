@@ -30,6 +30,23 @@ spec:
             - name: transmission-openvpn-downloads
               mountPath: /data
               readOnly: true
+          env:
+            - name: LOCAL_NETWORK
+              value: 192.168.0.0/16
+            - name: OPENVPN_CONFIG
+              value: france
+            - name: OPENVPN_PROVIDER
+              value: PIA
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: transmission-openvpn-secret
+                  key: OPENVPN_PASSWORD
+            - name: OPENVPN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: transmission-openvpn-secret
+                  key: OPENVPN_USERNAME
       volumes:
         - name: transmission-openvpn-downloads
           persistentVolumeClaim:
