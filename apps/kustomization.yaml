@@ -4,3 +4,4 @@ namespace: argocd
 resources:
   - jellyfin-app.yaml
   - transmission-app.yaml
+  - radarr-app.yaml
