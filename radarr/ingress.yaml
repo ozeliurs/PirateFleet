@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - radarr.basalt.ozeliurs.com
+        - radarr.ozeliurs.com
       secretName: radarr-tls
   rules:
-    - host: radarr.basalt.ozeliurs.com
+    - host: radarr.ozeliurs.com
       http:
         paths:
           - path: /
