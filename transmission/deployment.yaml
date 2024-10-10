@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission-openvpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission-openvpn
+  template:
+    metadata:
+      labels:
+        app: transmission-openvpn
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-media
+      containers:
+        - name: transmission-openvpn
+          image: haugene/transmission-openvpn
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          ports:
+            - containerPort: 8096
+              protocol: TCP
+          volumeMounts:
+            - name: transmission-openvpn-config
+              mountPath: /config
+            - name: transmission-openvpn-downloads
+              mountPath: /data
+              readOnly: true
+      volumes:
+        - name: transmission-openvpn-downloads
+          persistentVolumeClaim:
+            claimName: transmission-openvpn-downloads
+        - name: transmission-openvpn-config
+          persistentVolumeClaim:
+            claimName: transmission-openvpn-config
