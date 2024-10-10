@@ -4,7 +4,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: media-storage
-provisioner: microk8s.io/hostpath
+provisioner: local-path
 reclaimPolicy: Retain
 allowVolumeExpansion: True
 ---
