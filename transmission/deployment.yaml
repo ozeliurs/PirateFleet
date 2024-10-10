@@ -22,7 +22,7 @@ spec:
               add:
                 - NET_ADMIN
           ports:
-            - containerPort: 8096
+            - containerPort: 9091
               protocol: TCP
           volumeMounts:
             - name: transmission-openvpn-config
