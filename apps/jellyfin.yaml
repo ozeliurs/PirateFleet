@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jellyfin-app # You can change this name as needed
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:ozeliurs/PirateFleet.git
+    path: jellyfin
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
