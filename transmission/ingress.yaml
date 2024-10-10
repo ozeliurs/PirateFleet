@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: transmission
+                name: transmission-openvpn
                 port:
                   number: 9091
