@@ -9,11 +9,8 @@ spec:
     path: jellyfin
     targetRevision: HEAD
   destination:
-    namespace: jellyfin
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
