@@ -27,9 +27,6 @@ spec:
               mountPath: /home/media
             - name: radarr-downloads
               mountPath: /home/downloads
-            - name: localtime
-              mountPath: /etc/localtime
-              readOnly: true
       volumes:
         - name: radarr-config
           persistentVolumeClaim:
