@@ -22,13 +22,13 @@ spec:
           volumeMounts:
             - name: jellyfin-config
               mountPath: /config
-            - name: media
+            - name: jellyfin-media
               mountPath: /media
               readOnly: true
       volumes:
-        - name: media
+        - name: jellyfin-media
           persistentVolumeClaim:
-            claimName: media-pvc
+            claimName: jellyfin-media-pvc
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config
