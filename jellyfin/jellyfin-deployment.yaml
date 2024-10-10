@@ -18,9 +18,15 @@ spec:
           ports:
             - containerPort: 8096
           volumeMounts:
-            - name: jellyfin-data
+            - name: jellyfin-config
               mountPath: /config
+            - name: media
+              mountPath: /media
+              readOnly: true
       volumes:
-        - name: jellyfin-data
+        - name: media
           persistentVolumeClaim:
-            claimName: jellyfin-pvc
+            claimName: media-pvc
+        - name: jellyfin-config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
