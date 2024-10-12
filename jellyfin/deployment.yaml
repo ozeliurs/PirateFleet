@@ -13,7 +13,7 @@ spec:
         app: jellyfin
     spec:
       nodeSelector:
-        kubernetes.io/hostname: k3s-media
+        kubernetes.io/hostname: basalt
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin
