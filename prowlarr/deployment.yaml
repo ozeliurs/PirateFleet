@@ -14,9 +14,6 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/hostname: basalt
-      dnsConfig:
-        nameservers:
-          - 1.1.1.1
       containers:
         - name: prowlarr
           image: lscr.io/linuxserver/prowlarr:latest
