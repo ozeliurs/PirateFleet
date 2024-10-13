@@ -20,6 +20,11 @@ spec:
           ports:
             - containerPort: 7878
               protocol: TCP
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           volumeMounts:
             - name: radarr-config
               mountPath: /config

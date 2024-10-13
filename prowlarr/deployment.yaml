@@ -20,6 +20,11 @@ spec:
           ports:
             - containerPort: 9696
               protocol: TCP
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           volumeMounts:
             - name: prowlarr-config
               mountPath: /config

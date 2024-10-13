@@ -19,6 +19,11 @@ spec:
           image: lscr.io/linuxserver/jellyfin
           ports:
             - containerPort: 8096
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           volumeMounts:
             - name: jellyfin-config
               mountPath: /config

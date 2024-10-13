@@ -20,6 +20,11 @@ spec:
           ports:
             - containerPort: 8989
               protocol: TCP
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           volumeMounts:
             - name: sonarr-config
               mountPath: /config

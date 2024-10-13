@@ -46,6 +46,10 @@ spec:
                 secretKeyRef:
                   name: transmission-openvpn-secret
                   key: OPENVPN_USERNAME
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
       volumes:
         - name: transmission-openvpn-downloads
           persistentVolumeClaim:
