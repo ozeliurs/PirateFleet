@@ -8,3 +8,4 @@ resources:
   - sonarr-app.yaml
   - prowlarr-app.yaml
   # - flaresolverr-app.yaml
+  - pinchflat-app.yaml

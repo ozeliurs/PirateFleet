@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pinchflat-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare-dns"
+spec:
+  tls:
+    - hosts:
+        - pinchflat.ozeliurs.com
+      secretName: pinchflat-tls
+  rules:
+    - host: pinchflat.ozeliurs.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pinchflat
+                port:
+                  number: 8945
