@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wizarr
+  template:
+    metadata:
+      labels:
+        app: wizarr
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: basalt
+      containers:
+        - name: wizarr
+          image: ghcr.io/wizarrrr/wizarr
+          ports:
+            - containerPort: 5690
+              protocol: TCP
+          volumeMounts:
+            - name: wizarr-config
+              mountPath: /data/database
+      volumes:
+        - name: wizarr-config
+          persistentVolumeClaim:
+            claimName: wizarr-config
