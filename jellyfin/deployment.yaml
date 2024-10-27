@@ -30,6 +30,9 @@ spec:
             - name: jellyfin-media
               mountPath: /media
               readOnly: true
+            - name: remote-media # Add this new volume mount
+              mountPath: /remote-media
+              readOnly: true
       volumes:
         - name: jellyfin-media
           persistentVolumeClaim:
@@ -37,3 +40,7 @@ spec:
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config
+        - name: remote-media # Add this new volume
+          nfs:
+            server: 192.168.1.126
+            path: /Media
