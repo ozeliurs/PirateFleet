@@ -36,9 +36,11 @@ spec:
         - name: radarr-config
           persistentVolumeClaim:
             claimName: radarr-config
-        - name: radarr-media
-          persistentVolumeClaim:
-            claimName: radarr-media-pvc
         - name: radarr-downloads
-          persistentVolumeClaim:
-            claimName: radarr-downloads-pvc
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Downloads
+        - name: radarr-media
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Media

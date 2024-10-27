@@ -27,16 +27,10 @@ spec:
           volumeMounts:
             - name: jellyfin-config
               mountPath: /config
-            - name: jellyfin-media
-              mountPath: /media
-              readOnly: true
-            - name: remote-media # Add this new volume mount
+            - name: remote-media
               mountPath: /remote-media
               readOnly: true
       volumes:
-        - name: jellyfin-media
-          persistentVolumeClaim:
-            claimName: jellyfin-media-pvc
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config
