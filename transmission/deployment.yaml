@@ -57,4 +57,4 @@ spec:
         - name: transmission-openvpn-downloads
           nfs:
             server: 192.168.1.126
-            path: /mnt/user/Dowloads
+            path: /mnt/user/Downloads
