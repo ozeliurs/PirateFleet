@@ -6,8 +6,6 @@ resources:
   - config-pv.yaml
   - config-pvc.yaml
   - deployment.yaml
-  - downloads-pv.yaml
-  - downloads-pvc.yaml
   - ingress.yaml
   - service.yaml
   - namespace.yaml
