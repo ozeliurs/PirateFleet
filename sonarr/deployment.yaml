@@ -36,9 +36,11 @@ spec:
         - name: sonarr-config
           persistentVolumeClaim:
             claimName: sonarr-config
-        - name: sonarr-media
-          persistentVolumeClaim:
-            claimName: sonarr-media-pvc
         - name: sonarr-downloads
-          persistentVolumeClaim:
-            claimName: sonarr-downloads-pvc
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Downloads
+        - name: sonarr-media
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Media

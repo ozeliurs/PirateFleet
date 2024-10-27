@@ -51,9 +51,10 @@ spec:
             - name: PGID
               value: "1000"
       volumes:
-        - name: transmission-openvpn-downloads
-          persistentVolumeClaim:
-            claimName: transmission-openvpn-downloads
         - name: transmission-openvpn-config
           persistentVolumeClaim:
             claimName: transmission-openvpn-config
+        - name: transmission-openvpn-downloads
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Dowloads

@@ -4,10 +4,6 @@ namespace: radarr
 resources:
   - config-pv.yaml
   - config-pvc.yaml
-  - media-pv.yaml
-  - media-pvc.yaml
-  - downloads-pv.yaml
-  - downloads-pvc.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
