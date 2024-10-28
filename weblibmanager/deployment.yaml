@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weblibmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weblibmanager
+  template:
+    metadata:
+      labels:
+        app: weblibmanager
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: basalt
+      containers:
+        - name: weblibmanager
+          image: ghcr.io/ozeliurs/weblibmanager:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SQLITE_PATH
+              value: "/data/database.db"
+          volumeMounts:
+            - name: weblibmanager-config
+              mountPath: /data
+            - name: media
+              mountPath: /media
+              readOnly: true
+      volumes:
+        - name: weblibmanager-config
+          persistentVolumeClaim:
+            claimName: weblibmanager-config
+        - name: media
+          nfs:
+            server: 192.168.1.126
+            path: /mnt/user/Media
