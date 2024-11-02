@@ -13,7 +13,7 @@ spec:
         app: kavita
     spec:
       nodeSelector:
-        kubernetes.io/hostname: basalt
+        kubernetes.io/hostname: k3s-basalt
       containers:
         - name: kavita
           image: linuxserver/kavita:latest

@@ -13,7 +13,7 @@ spec:
         app: weblibmanager
     spec:
       nodeSelector:
-        kubernetes.io/hostname: basalt
+        kubernetes.io/hostname: k3s-basalt
       containers:
         - name: weblibmanager
           image: ghcr.io/ozeliurs/weblibmanager:latest

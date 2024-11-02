@@ -13,7 +13,7 @@ spec:
         app: wizarr
     spec:
       nodeSelector:
-        kubernetes.io/hostname: basalt
+        kubernetes.io/hostname: k3s-basalt
       containers:
         - name: wizarr
           image: ghcr.io/wizarrrr/wizarr

@@ -13,7 +13,7 @@ spec:
         app: pinchflat
     spec:
       nodeSelector:
-        kubernetes.io/hostname: basalt
+        kubernetes.io/hostname: k3s-basalt
       containers:
         - name: pinchflat
           image: ghcr.io/kieraneglin/pinchflat:latest

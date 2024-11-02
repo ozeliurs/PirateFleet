@@ -13,7 +13,7 @@ spec:
         app: transmission-openvpn
     spec:
       nodeSelector:
-        kubernetes.io/hostname: basalt
+        kubernetes.io/hostname: k3s-basalt
       containers:
         - name: transmission-openvpn
           image: haugene/transmission-openvpn
