@@ -12,6 +12,8 @@ spec:
       labels:
         app: kavita
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: basalt
       containers:
         - name: kavita
           image: linuxserver/kavita:latest

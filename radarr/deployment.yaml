@@ -12,6 +12,8 @@ spec:
       labels:
         app: radarr
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: basalt
       containers:
         - name: radarr
           image: lscr.io/linuxserver/radarr:latest

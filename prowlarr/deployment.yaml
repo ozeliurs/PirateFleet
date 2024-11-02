@@ -12,6 +12,8 @@ spec:
       labels:
         app: prowlarr
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: basalt
       containers:
         - name: prowlarr
           image: lscr.io/linuxserver/prowlarr:latest
