@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 1Gi # Adjust as needed
-  storageClassName: local-storage
+  storageClassName: local-path
