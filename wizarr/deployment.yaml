@@ -12,8 +12,6 @@ spec:
       labels:
         app: wizarr
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: basalt
       containers:
         - name: wizarr
           image: ghcr.io/wizarrrr/wizarr
