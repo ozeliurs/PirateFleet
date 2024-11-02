@@ -12,8 +12,6 @@ spec:
       labels:
         app: transmission-openvpn
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: basalt
       containers:
         - name: transmission-openvpn
           image: haugene/transmission-openvpn
