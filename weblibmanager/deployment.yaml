@@ -27,7 +27,6 @@ spec:
               mountPath: /data
             - name: media
               mountPath: /media
-              readOnly: true
       volumes:
         - name: weblibmanager-config
           persistentVolumeClaim:
