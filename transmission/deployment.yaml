@@ -21,6 +21,7 @@ spec:
             capabilities:
               add:
                 - NET_ADMIN
+            privileged: true
           ports:
             - containerPort: 9091
               protocol: TCP
