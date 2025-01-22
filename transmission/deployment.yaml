@@ -24,6 +24,11 @@ spec:
           ports:
             - containerPort: 9091
               protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 9091
+            initialDelaySeconds: 30
+            periodSeconds: 10
           volumeMounts:
             - name: transmission-openvpn-config
               mountPath: /config
