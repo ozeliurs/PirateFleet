@@ -21,9 +21,6 @@ spec:
             capabilities:
               add:
                 - NET_ADMIN
-            devices:
-              - pathOnHost: /dev/net/tun
-                pathInContainer: /dev/net/tun
             privileged: true
           ports:
             - containerPort: 9091
