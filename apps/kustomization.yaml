@@ -11,3 +11,4 @@ resources:
   - wizarr-app.yaml
   - kavita-app.yaml
   - weblibmanager-app.yaml
+  - jellyseer-app.yaml
