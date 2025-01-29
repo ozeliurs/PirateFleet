@@ -30,6 +30,9 @@ spec:
             - name: media
               mountPath: /media
               readOnly: true
+            - name: jellyfin-configmap
+              mountPath: /etc/jellyfin/system.xml
+              subPath: system.xml
       volumes:
         - name: jellyfin-config
           persistentVolumeClaim:
@@ -38,3 +41,6 @@ spec:
           nfs:
             server: 192.168.1.126
             path: /mnt/user/Media
+        - name: jellyfin-configmap
+          configMap:
+            name: jellyfin-configmap
