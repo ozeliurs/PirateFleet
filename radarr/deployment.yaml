@@ -27,6 +27,18 @@ spec:
           ports:
             - containerPort: 7878
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 30
+            periodSeconds: 10
           env:
             - name: PUID
               value: "1000"

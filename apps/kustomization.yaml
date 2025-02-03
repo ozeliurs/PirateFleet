@@ -7,5 +7,4 @@ resources:
   - radarr-app.yaml
   - sonarr-app.yaml
   - prowlarr-app.yaml
-  - wizarr-app.yaml
   - jellyseer-app.yaml
