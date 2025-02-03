@@ -7,8 +7,5 @@ resources:
   - radarr-app.yaml
   - sonarr-app.yaml
   - prowlarr-app.yaml
-  # - flaresolverr-app.yaml
   - wizarr-app.yaml
-  - kavita-app.yaml
-  - weblibmanager-app.yaml
   - jellyseer-app.yaml

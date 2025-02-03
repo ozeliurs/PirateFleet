@@ -17,6 +17,10 @@ spec:
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:latest
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
           ports:
             - containerPort: 5055
               protocol: TCP

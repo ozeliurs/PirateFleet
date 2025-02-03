@@ -17,6 +17,10 @@ spec:
       containers:
         - name: prowlarr
           image: lscr.io/linuxserver/prowlarr:latest
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "2"
           ports:
             - containerPort: 9696
               protocol: TCP

@@ -17,6 +17,10 @@ spec:
       containers:
         - name: wizarr
           image: ghcr.io/wizarrrr/wizarr
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "2"
           ports:
             - containerPort: 5690
               protocol: TCP
