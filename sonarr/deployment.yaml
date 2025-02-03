@@ -21,6 +21,9 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "2"
+            requests:
+              memory: "0Gi"
+              cpu: "0"
           ports:
             - containerPort: 8989
               protocol: TCP

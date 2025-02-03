@@ -21,6 +21,9 @@ spec:
             limits:
               cpu: "1"
               memory: "1Gi"
+            requests:
+              memory: "0Gi"
+              cpu: "0"
           ports:
             - containerPort: 5055
               protocol: TCP
