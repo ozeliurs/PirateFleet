@@ -8,4 +8,3 @@ resources:
   - sonarr-app.yaml
   - prowlarr-app.yaml
   - jellyseer-app.yaml
-  - headphones-app.yaml
