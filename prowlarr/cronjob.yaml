@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: prowlarr-custom-indexers
+spec:
+  schedule: "0 */12 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        metadata:
+          labels:
+            app: prowlarr-custom-indexers
+        spec:
+          serviceAccountName: prowlarr-custom-indexers
+          restartPolicy: OnFailure
+          containers:
+            - name: update-custom-indexers
+              image: curlimages/curl:8.8.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -eu
+
+                  CUSTOM_DIR="/config/Definitions/Custom"
+                  mkdir -p "${CUSTOM_DIR}"
+
+                  download() {
+                    url="$1"
+                    filename="$2"
+                    tmp_file="$(mktemp)"
+                    curl -fsSLo "${tmp_file}" "${url}"
+                    rm -f "${CUSTOM_DIR}/${filename}"
+                    mv "${tmp_file}" "${CUSTOM_DIR}/${filename}"
+                  }
+
+                  download "https://raw.githubusercontent.com/Jackett/Jackett/master/src/Jackett.Common/Definitions/yggtorrent.yml" "yggtorrent.yml"
+                  download "https://raw.githubusercontent.com/Jackett/Jackett/master/src/Jackett.Common/Definitions/yggcookie.yml" "yggcookie.yml"
+                  download "https://gist.githubusercontent.com/Clemv95/8bfded23ef23ec78f6678896f42a2b60/raw/4daa8700ee11950b7eb6a13e0b86341c1f584f1a/ygg-api-download.yml" "ygg-api-download.yml"
+
+                  TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
+                  NAMESPACE="$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)"
+                  API_SERVER="https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}"
+                  TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+                  PATCH_BODY=$(printf '{"spec":{"template":{"metadata":{"annotations":{"custom-indexers/last-sync":"%s"}}}}}' "${TIMESTAMP}")
+
+                  curl -fsS \
+                    --header "Authorization: Bearer ${TOKEN}" \
+                    --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
+                    -XPATCH \
+                    -H "Content-Type: application/strategic-merge-patch+json" \
+                    -d "${PATCH_BODY}" \
+                    "${API_SERVER}/apis/apps/v1/namespaces/${NAMESPACE}/deployments/prowlarr"
+              volumeMounts:
+                - name: prowlarr-config
+                  mountPath: /config
+          volumes:
+            - name: prowlarr-config
+              persistentVolumeClaim:
+                claimName: prowlarr-config

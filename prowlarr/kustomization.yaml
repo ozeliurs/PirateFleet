@@ -2,9 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: prowlarr
 resources:
+  - namespace.yaml
   - config-pv.yaml
   - config-pvc.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-  - namespace.yaml
+  - cronjob-rbac.yaml
+  - cronjob.yaml
