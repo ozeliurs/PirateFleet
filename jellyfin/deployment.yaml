@@ -16,7 +16,7 @@ spec:
         kubernetes.io/hostname: k3s-basalt
       containers:
         - name: jellyfin
-          image: lscr.io/linuxserver/jellyfin
+          image: lscr.io/linuxserver/jellyfin:10.10.7
           resources:
             limits:
               cpu: "4"
