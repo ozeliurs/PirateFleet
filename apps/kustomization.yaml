@@ -8,3 +8,4 @@ resources:
   - sonarr-app.yaml
   - prowlarr-app.yaml
   - jellyseer-app.yaml
+  - wizarr-app.yaml
