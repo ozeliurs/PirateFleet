@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prowlarr-custom-cont-init
+  labels:
+    app: prowlarr
+  namespace: prowlarr
+data:
+  10-update-custom-definitions.sh: |-
+    #!/bin/bash
+    # --- Updating Prowlarr custom definitions ---
+    echo "[CustomDefs] Downloading the YggAPI definition..."
+
+    # Customize as needed for your setup:
+    PUID=${PUID:-1000}
+    PGID=${PGID:-1000}
+
+    # Path inside the Prowlarr container, do not modify
+    DEST="/config/Definitions/Custom"
+
+    # Gist URL (magnet version)
+    URL="https://gist.githubusercontent.com/Clemv95/8bfded23ef23ec78f6678896f42a2b60/raw/ygg-api-magnet.yml"
+
+    mkdir -p "$DEST"
+
+    echo "Downloading ygg-api-magnet.yml"
+    if curl -fsSL "$URL" -o "$DEST/ygg-api-magnet.yml"; then
+        chown "$PUID:$PGID" "$DEST/ygg-api-magnet.yml"
+        chmod 644 "$DEST/ygg-api-magnet.yml"
+        echo "OK"
+        echo "[CustomDefs] Completed successfully."
+    else
+        echo "Download error"
+        echo "[CustomDefs] Failed - check your internet connection."
+        exit 1
+    fi

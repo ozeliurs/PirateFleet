@@ -47,7 +47,14 @@ spec:
           volumeMounts:
             - name: prowlarr-config
               mountPath: /config
+            - name: custom-cont-init
+              mountPath: /custom-cont-init.d
+              readOnly: true
       volumes:
         - name: prowlarr-config
           persistentVolumeClaim:
             claimName: prowlarr-config
+        - name: custom-cont-init
+          configMap:
+            name: prowlarr-custom-cont-init
+            defaultMode: 0755
