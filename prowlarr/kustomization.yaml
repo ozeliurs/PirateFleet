@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - config-pv.yaml
   - config-pvc.yaml
+  - custom-cont-init-configmap.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
