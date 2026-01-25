@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ygege
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ygege
+  template:
+    metadata:
+      labels:
+        app: ygege
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-basalt
+      containers:
+        - name: ygege
+          image: uwucode/ygege:latest
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "2"
+            requests:
+              memory: "0Gi"
+              cpu: "0"
+          ports:
+            - containerPort: 8715
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8715
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8715
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          env:
+            - name: YGG_USERNAME
+              value: "zenzenzense4"
+            - name: YGG_PASSWORD
+              value: "token123456789"
+            - name: LOG_LEVEL
+              value: "debug"
+          volumeMounts:
+            - name: ygege-config
+              mountPath: /config
+      volumes:
+        - name: ygege-config
+          persistentVolumeClaim:
+            claimName: ygege-config

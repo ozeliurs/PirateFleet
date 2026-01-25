@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ygege
+spec:
+  selector:
+    app: ygege
+  ports:
+    - protocol: TCP
+      port: 8715
+      targetPort: 8715
+  type: ClusterIP
