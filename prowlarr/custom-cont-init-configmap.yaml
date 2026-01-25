@@ -18,15 +18,27 @@ data:
     # Path inside the Prowlarr container, do not modify
     DEST="/config/Definitions/Custom"
 
-    # Gist URL (magnet version)
-    URL="https://gist.githubusercontent.com/Clemv95/8bfded23ef23ec78f6678896f42a2b60/raw/ygg-api-magnet.yml"
+    # Definition URLs
+    YGG_API_URL="https://gist.githubusercontent.com/Clemv95/8bfded23ef23ec78f6678896f42a2b60/raw/ygg-api-magnet.yml"
+    YGEGE_URL="https://raw.githubusercontent.com/UwUDev/ygege/develop/ygege.yml"
 
     mkdir -p "$DEST"
 
     echo "Downloading ygg-api-magnet.yml"
-    if curl -fsSL "$URL" -o "$DEST/ygg-api-magnet.yml"; then
+    if curl -fsSL "$YGG_API_URL" -o "$DEST/ygg-api-magnet.yml"; then
         chown "$PUID:$PGID" "$DEST/ygg-api-magnet.yml"
         chmod 644 "$DEST/ygg-api-magnet.yml"
+        echo "OK"
+    else
+        echo "Download error"
+        echo "[CustomDefs] Failed - check your internet connection."
+        exit 1
+    fi
+
+    echo "Downloading ygege.yml"
+    if curl -fsSL "$YGEGE_URL" -o "$DEST/ygege.yml"; then
+        chown "$PUID:$PGID" "$DEST/ygege.yml"
+        chmod 644 "$DEST/ygege.yml"
         echo "OK"
         echo "[CustomDefs] Completed successfully."
     else
