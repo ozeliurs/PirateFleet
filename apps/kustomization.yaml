@@ -9,3 +9,4 @@ resources:
   - prowlarr-app.yaml
   - jellyseer-app.yaml
   - wizarr-app.yaml
+  - ygege-app.yaml
