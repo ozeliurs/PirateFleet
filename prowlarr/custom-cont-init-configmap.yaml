@@ -20,11 +20,41 @@ data:
 
     # Definition URL
     YGEGE_URL="https://raw.githubusercontent.com/UwUDev/ygege/develop/ygege.yml"
+    YGEGE_LINK_URL="http://ygege.ygege:8715/"
 
     mkdir -p "$DEST"
 
     echo "Downloading ygege.yml"
     if curl -fsSL "$YGEGE_URL" -o "$DEST/ygege.yml"; then
+        python - "$DEST/ygege.yml" "$YGEGE_LINK_URL" <<'PY'
+import re
+import sys
+
+path = sys.argv[1]
+link = sys.argv[2]
+
+with open(path, "r", encoding="utf-8") as handle:
+    lines = handle.readlines()
+
+if any(link in line for line in lines):
+    sys.exit(0)
+
+for index, line in enumerate(lines):
+    match = re.match(r"^(?P<indent>\\s*)links:\\s*$", line)
+    if match:
+        indent = match.group("indent")
+        item_indent = f"{indent}  "
+        lines.insert(index + 1, f"{item_indent}- {link}\\n")
+        break
+else:
+    if lines and not lines[-1].endswith("\\n"):
+        lines[-1] = f"{lines[-1]}\\n"
+    lines.append("\\nlinks:\\n")
+    lines.append(f"  - {link}\\n")
+
+with open(path, "w", encoding="utf-8") as handle:
+    handle.writelines(lines)
+PY
         chown "$PUID:$PGID" "$DEST/ygege.yml"
         chmod 644 "$DEST/ygege.yml"
         echo "OK"
