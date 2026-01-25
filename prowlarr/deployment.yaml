@@ -1,63 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: prowlarr
+  name: prowlarr
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
-            app: prowlarr
-    dnsConfig:
-        searches:
-            - ygege.svc.cluster.local
-    template:
-        metadata:
-            labels:
-                app: prowlarr
-        spec:
-            nodeSelector:
-                kubernetes.io/hostname: k3s-basalt
-            containers:
-                - name: prowlarr
-                  image: lscr.io/linuxserver/prowlarr:latest
-                  resources:
-                      limits:
-                          memory: "1Gi"
-                          cpu: "2"
-                      requests:
-                          memory: "0Gi"
-                          cpu: "0"
-                  ports:
-                      - containerPort: 9696
-                        protocol: TCP
-                  livenessProbe:
-                      httpGet:
-                          path: /
-                          port: 9696
-                      initialDelaySeconds: 30
-                      periodSeconds: 10
-                  readinessProbe:
-                      httpGet:
-                          path: /
-                          port: 9696
-                      initialDelaySeconds: 30
-                      periodSeconds: 10
-                  env:
-                      - name: PUID
-                        value: "1000"
-                      - name: PGID
-                        value: "1000"
-                  volumeMounts:
-                      - name: prowlarr-config
-                        mountPath: /config
-                      - name: custom-cont-init
-                        mountPath: /custom-cont-init.d
-                        readOnly: true
-            volumes:
-                - name: prowlarr-config
-                  persistentVolumeClaim:
-                      claimName: prowlarr-config
-                - name: custom-cont-init
-                  configMap:
-                      name: prowlarr-custom-cont-init
-                      defaultMode: 0755
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-basalt
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr:latest
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "2"
+            requests:
+              memory: "0Gi"
+              cpu: "0"
+          ports:
+            - containerPort: 9696
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9696
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9696
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: prowlarr-config
+              mountPath: /config
+            - name: custom-cont-init
+              mountPath: /custom-cont-init.d
+              readOnly: true
+      volumes:
+        - name: prowlarr-config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
+        - name: custom-cont-init
+          configMap:
+            name: prowlarr-custom-cont-init
+            defaultMode: 0755
