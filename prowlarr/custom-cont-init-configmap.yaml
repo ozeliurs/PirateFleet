@@ -25,6 +25,7 @@ data:
 
     echo "Downloading ygege.yml"
     if curl -fsSL "$YGEGE_URL" -o "$DEST/ygege.yml"; then
+        sed -i 's/ygege-dns-redirect\.local/ygege.ygege/g' "$DEST/ygege.yml"
         chown "$PUID:$PGID" "$DEST/ygege.yml"
         chmod 644 "$DEST/ygege.yml"
         echo "OK"
