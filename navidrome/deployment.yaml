@@ -17,6 +17,11 @@ spec:
       containers:
         - name: navidrome
           image: deluan/navidrome:latest
+          env:
+            - name: ND_LASTFM_APIKEY
+              value: "af0e77858a2da6dece27f69af333c622"
+            - name: ND_LASTFM_SECRET
+              value: "878e939c8ff4eb3f129ed97f9639cc49"
           ports:
             - containerPort: 4533
               protocol: TCP
